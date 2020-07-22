@@ -31,7 +31,14 @@ def post(url, **kwargs):
     for k, v in kwargs["data"].items():
         kwargs["data"][k] = v if not isinstance(v, str) else v.encode("ISO-8859-1")
     kwargs["headers"] = {"Content-Type": "application/x-www-form-urlencoded; charset=ISO-8859-1"}
-    return requests.post(url, **kwargs)
+    #############################################################
+    # WHY DOES THIS POST REQUEST MISBEHAVE WITH MY WIMS SERVICE?
+    #############################################################
+    #return requests.post(url, **kwargs)                                        
+    ##message = f"url={url}, kwargs={kwargs}"                                   
+    ##raise Exception(message)                                                  
+    return requests.get(url, params=kwargs["data"])
+
 
 
 
